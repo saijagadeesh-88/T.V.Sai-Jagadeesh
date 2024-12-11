@@ -1,0 +1,33 @@
+; Program to convert a decimal number to hexadecimal
+; Input: Decimal number in C
+; Output: Hexadecimal digits stored in memory starting at 8050H
+
+LXI H, 8050H       
+MVI B, 16         
+MOV D, C           
+
+CONVERT: MVI E, 0 
+MOV A, D         
+
+DIV_LOOP: CMP B      
+JC STORE_REMAINDER   
+SUB B               
+INR E             
+JMP DIV_LOOP        
+
+STORE_REMAINDER: MOV D, A 
+MOV A, D           
+CPI 10          
+JC DIGIT           
+ADI 55             
+JMP SAVE_TO_MEM
+
+DIGIT: ADI 48       
+
+SAVE_TO_MEM: MOV M, A  
+INX H               
+MOV A, E           
+MOV D, A            
+CPI 0               
+JNZ CONVERT        
+HLT
