@@ -1,0 +1,8 @@
+MVI A,9AH 	
+ANI 80H 	
+JZ NEG 	
+MVI A,22 	
+JMP STO 	
+NEG: MVI A,11 	
+STO: STA 8501 	
+HLT
